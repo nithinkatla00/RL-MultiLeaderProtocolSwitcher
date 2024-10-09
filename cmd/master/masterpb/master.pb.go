@@ -8,7 +8,7 @@ import (
 	fmt "fmt"
 	_ "github.com/gogo/protobuf/gogoproto"
 	proto "github.com/gogo/protobuf/proto"
-	github_com_ibalajiarun_go_consensus_peer_peerpb "github.com/nithinkatla00/RL-MultiLeaderProtocolSwitcher/peer/peerpb"
+	github_com_nithinkatla00_rl_multileaderprotocolswitcher_peer_peerpb "github.com/nithinkatla00/RL-MultiLeaderProtocolSwitcher/peer/peerpb"
 	peerpb "github.com/nithinkatla00/RL-MultiLeaderProtocolSwitcher/peer/peerpb"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
@@ -31,7 +31,7 @@ const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 
 type ServerResponse struct {
 	*peerpb.PeerConfig `protobuf:"bytes,1,opt,name=config,proto3,embedded=config" json:"config,omitempty"`
-	PeerID             github_com_ibalajiarun_go_consensus_peer_peerpb.PeerID `protobuf:"varint,2,opt,name=peer_id,json=peerId,proto3,casttype=github.com/nithinkatla00/RL-MultiLeaderProtocolSwitcher/peer/peerpb.PeerID" json:"peer_id,omitempty"`
+	PeerID             github_com_nithinkatla00_rl_multileaderprotocolswitcher_peer_peerpb.PeerID `protobuf:"varint,2,opt,name=peer_id,json=peerId,proto3,casttype=github.com/nithinkatla00/RL-MultiLeaderProtocolSwitcher/peer/peerpb.PeerID" json:"peer_id,omitempty"`
 }
 
 func (m *ServerResponse) Reset()         { *m = ServerResponse{} }
@@ -67,7 +67,7 @@ func (m *ServerResponse) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_ServerResponse proto.InternalMessageInfo
 
-func (m *ServerResponse) GetPeerID() github_com_ibalajiarun_go_consensus_peer_peerpb.PeerID {
+func (m *ServerResponse) GetPeerID() github_com_nithinkatla00_rl_multileaderprotocolswitcher_peer_peerpb.PeerID {
 	if m != nil {
 		return m.PeerID
 	}
@@ -344,7 +344,7 @@ type ClientConfig struct {
 	Algorithm         peerpb.Algorithm                                       `protobuf:"varint,3,opt,name=algorithm,proto3,enum=peerpb.Algorithm" json:"algorithm,omitempty"`
 	MaxFailures       int32                                                  `protobuf:"varint,4,opt,name=max_failures,json=maxFailures,proto3" json:"max_failures,omitempty"`
 	MaxFastFailures   int32                                                  `protobuf:"varint,5,opt,name=max_fast_failures,json=maxFastFailures,proto3" json:"max_fast_failures,omitempty"`
-	LeaderID          github_com_ibalajiarun_go_consensus_peer_peerpb.PeerID `protobuf:"varint,6,opt,name=leader_id,json=leaderId,proto3,casttype=github.com/nithinkatla00/RL-MultiLeaderProtocolSwitcher/peer/peerpb.PeerID" json:"leader_id,omitempty"`
+	LeaderID          github_com_nithinkatla00_rl_multileaderprotocolswitcher_peer_peerpb.PeerID `protobuf:"varint,6,opt,name=leader_id,json=leaderId,proto3,casttype=github.com/nithinkatla00/RL-MultiLeaderProtocolSwitcher/peer/peerpb.PeerID" json:"leader_id,omitempty"`
 }
 
 func (m *ClientConfig) Reset()         { *m = ClientConfig{} }
@@ -408,7 +408,7 @@ func (m *ClientConfig) GetMaxFastFailures() int32 {
 	return 0
 }
 
-func (m *ClientConfig) GetLeaderID() github_com_ibalajiarun_go_consensus_peer_peerpb.PeerID {
+func (m *ClientConfig) GetLeaderID() github_com_nithinkatla00_rl_multileaderprotocolswitcher_peer_peerpb.PeerID {
 	if m != nil {
 		return m.LeaderID
 	}
@@ -1380,7 +1380,7 @@ func (m *ServerResponse) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.PeerID |= github_com_ibalajiarun_go_consensus_peer_peerpb.PeerID(b&0x7F) << shift
+				m.PeerID |= github_com_nithinkatla00_rl_multileaderprotocolswitcher_peer_peerpb.PeerID(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -2376,7 +2376,7 @@ func (m *ClientConfig) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.LeaderID |= github_com_ibalajiarun_go_consensus_peer_peerpb.PeerID(b&0x7F) << shift
+				m.LeaderID |= github_com_nithinkatla00_rl_multileaderprotocolswitcher_peer_peerpb.PeerID(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}

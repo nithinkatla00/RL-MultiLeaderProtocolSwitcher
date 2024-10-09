@@ -1,6 +1,7 @@
 package kube
 
 import (
+	"context"
 	"fmt"
 	"io/ioutil"
 	"time"
@@ -64,13 +65,15 @@ func NewKubeDeploymentController(logger logger.Logger, nodeCount, clientCount in
 }
 
 func (kc *KubeController) Apply() error {
-	sDepResult, err := kc.dClient.Create(kc.serverDepManifest)
+	ctx := context.TODO() // Create a context
+
+	sDepResult, err := kc.dClient.Create(ctx, kc.serverDepManifest, v1.CreateOptions{})
 	if err != nil && !errors.IsAlreadyExists(err) {
 		return err
 	}
 	kc.logger.Infof("Created server deployment %q.\n", sDepResult.GetObjectMeta().GetName())
 
-	cDepResult, err := kc.dClient.Create(kc.clientDepManifest)
+	cDepResult, err := kc.dClient.Create(ctx, kc.clientDepManifest, v1.CreateOptions{})
 	if err != nil && !errors.IsAlreadyExists(err) {
 		return err
 	}
@@ -98,20 +101,31 @@ func readManifest(file string) (*appsv1.Deployment, error) {
 func (kc *KubeController) Delete() {
 	kc.logger.Info("Deleting deployment...")
 	deletePolicy := v1.DeletePropagationForeground
-	if err := kc.dClient.Delete(kc.serverDepManifest.Name, &v1.DeleteOptions{
+	ctx := context.TODO() // Create a context
+
+	// Delete the server deployment
+	if err := kc.dClient.Delete(ctx, kc.serverDepManifest.Name, v1.DeleteOptions{
 		PropagationPolicy: &deletePolicy,
 	}); err != nil {
 		panic(err)
 	}
-	if err := kc.dClient.Delete(kc.clientDepManifest.Name, &v1.DeleteOptions{
+	// Delete the client deployment
+	if err := kc.dClient.Delete(ctx, kc.clientDepManifest.Name, v1.DeleteOptions{
 		PropagationPolicy: &deletePolicy,
 	}); err != nil {
 		panic(err)
 	}
 
 	err := wait.PollImmediate(500*time.Millisecond, 60*time.Second, func() (bool, error) {
-		p, err := kc.clientset.CoreV1().Pods(v1.NamespaceDefault).List(v1.ListOptions{LabelSelector: fmt.Sprintf("app=%s", kc.serverDepManifest.Spec.Template.Labels["app"])})
-		if len(p.Items) == 0 || errors.IsNotFound(err) {
+		// Use the context here as well
+		p, err := kc.clientset.CoreV1().Pods(v1.NamespaceDefault).List(ctx, v1.ListOptions{
+			LabelSelector: fmt.Sprintf("app=%s", kc.serverDepManifest.Spec.Template.Labels["app"]),
+		})
+		if err != nil {
+			return false, err
+		}
+
+		if len(p.Items) == 0 {
 			kc.logger.Info("Pods removed")
 			return true, nil
 		}
