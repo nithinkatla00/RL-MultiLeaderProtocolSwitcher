@@ -3,8 +3,11 @@ module github.com/nithinkatla00/RL-MultiLeaderProtocolSwitcher
 go 1.23.2
 
 require (
+	github.com/cloudflare/bn256 v0.0.0-20241014205622-326b394675b7
+	github.com/deckarep/golang-set v1.8.0
 	github.com/gogo/protobuf v1.3.2
 	github.com/grpc-ecosystem/grpc-opentracing v0.0.0-20180507213350-8e809c8a8645
+	github.com/oasisprotocol/ed25519 v0.0.0-20210505154701-76d8c688d86e
 	github.com/opentracing/opentracing-go v1.2.0
 	github.com/pkg/errors v0.9.1
 	github.com/prometheus/client_golang v1.20.4
@@ -71,6 +74,7 @@ require (
 	github.com/tinylib/msgp v1.1.8 // indirect
 	github.com/x448/float16 v0.8.4 // indirect
 	go.uber.org/atomic v1.11.0 // indirect
+	golang.org/x/crypto v0.26.0 // indirect
 	golang.org/x/image v0.11.0 // indirect
 	golang.org/x/mod v0.17.0 // indirect
 	golang.org/x/net v0.28.0 // indirect

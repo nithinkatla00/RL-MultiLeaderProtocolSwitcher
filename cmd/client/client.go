@@ -143,38 +143,14 @@ func main() {
 
 		var reqFunc func(*commandpb.Command) (*commandpb.CommandResult, error)
 		switch config.Algorithm {
-		case peerpb.Algorithm_LinHybster:
-			fallthrough
 		case peerpb.Algorithm_SBFT:
-			fallthrough
-		case peerpb.Algorithm_SBFTSlow:
-			reqFunc = client.SBFT
-		case peerpb.Algorithm_SBFTx:
-			fallthrough
-		case peerpb.Algorithm_DQSBFTSlow:
-			fallthrough
-		case peerpb.Algorithm_Destiny:
-			reqFunc = client.ThresholdMultiPrimary
-		case peerpb.Algorithm_Dester:
-			reqFunc = client.Dester
-		case peerpb.Algorithm_DQPBFT:
-			fallthrough
-		case peerpb.Algorithm_Hybsterx:
-			reqFunc = client.MultiPrimary
-		case peerpb.Algorithm_Hotstuff:
-			fallthrough
-		case peerpb.Algorithm_ChainHotstuff:
 			fallthrough
 		case peerpb.Algorithm_MirBFT:
 			fallthrough
 		case peerpb.Algorithm_RCC:
 			fallthrough
-		case peerpb.Algorithm_MultiChainDuoBFTRCC:
-			fallthrough
 		case peerpb.Algorithm_Dispel:
 			reqFunc = client.MultiPrimaryRRTarget
-		case peerpb.Algorithm_Prime:
-			reqFunc = client.Prime
 		default:
 			reqFunc = client.Generic
 		}
