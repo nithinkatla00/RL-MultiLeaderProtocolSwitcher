@@ -1,6 +1,0 @@
-#ifndef UNTRUSTED_CONSTANTS_H
-#define UNTRUSTED_CONSTANTS_H
-
-#define BUF_LEN 256
-
-#endif

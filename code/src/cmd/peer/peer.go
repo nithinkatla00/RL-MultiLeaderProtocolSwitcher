@@ -8,7 +8,6 @@ import (
 	"github.com/nithinkatla00/RL-MultiLeaderProtocolSwitcher/protocols/dispel"
 	"github.com/nithinkatla00/RL-MultiLeaderProtocolSwitcher/protocols/dqpbft"
 	"github.com/nithinkatla00/RL-MultiLeaderProtocolSwitcher/protocols/mirbft"
-	"github.com/nithinkatla00/RL-MultiLeaderProtocolSwitcher/protocols/rcc"
 	"github.com/nithinkatla00/RL-MultiLeaderProtocolSwitcher/transport"
 )
 
@@ -17,8 +16,6 @@ func newPeer(cfg *peer.LocalConfig) *peer.Peer {
 
     var p peer.Protocol
     switch cfg.Algorithm {
-    case peerpb.Algorithm_RCC:
-        p = rcc.NewRCC(cfg) // Make sure NewRCC accepts *peer.LocalConfig
     case peerpb.Algorithm_MirBFT:
         p = mirbft.NewMirBFT(cfg)
     case peerpb.Algorithm_Dispel:
