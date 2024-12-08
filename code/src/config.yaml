@@ -1,6 +1,6 @@
 node_count: 7
 client_count: 2
-algorithm: Destiny
+algorithm: DQPBFT
 max_failures: 4
 max_fast_failures: 0
 leader_region: "winter"
@@ -49,4 +49,4 @@ client:
   total_requests: 10000000
   sleep_time_seconds: 15
   conflict_percent: 0
-  fast_response_percent: 100 # for duobft
+  fast_response_percent: 100

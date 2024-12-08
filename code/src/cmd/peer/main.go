@@ -11,10 +11,16 @@ import (
 	"syscall"
 	"time"
 
+	_ "net/http/pprof"
+
 	"github.com/nithinkatla00/RL-MultiLeaderProtocolSwitcher/cmd/master/masterpb"
 	"github.com/nithinkatla00/RL-MultiLeaderProtocolSwitcher/peer"
 	"github.com/nithinkatla00/RL-MultiLeaderProtocolSwitcher/peer/peerpb"
 	"github.com/nithinkatla00/RL-MultiLeaderProtocolSwitcher/pkg/logger"
+	"github.com/nithinkatla00/RL-MultiLeaderProtocolSwitcher/protocols/dispel"
+	"github.com/nithinkatla00/RL-MultiLeaderProtocolSwitcher/protocols/dqpbft"
+	"github.com/nithinkatla00/RL-MultiLeaderProtocolSwitcher/protocols/mirbft"
+	"github.com/nithinkatla00/RL-MultiLeaderProtocolSwitcher/transport"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 	flag "github.com/spf13/pflag"
 	"google.golang.org/grpc"
@@ -29,6 +35,24 @@ var (
 func startMetricsServer() {
 	http.Handle("/metrics", promhttp.Handler())
 	http.ListenAndServe(":9091", nil)
+}
+
+func NewPeer(cfg *peer.LocalConfig) *peer.Peer {
+    t := transport.NewGRPCTransport()
+
+    var p peer.Protocol
+    switch cfg.Algorithm {
+    case peerpb.Algorithm_MirBFT:
+        p = mirbft.NewMirBFT(cfg)
+    case peerpb.Algorithm_Dispel:
+        p = dispel.NewDispel(cfg)
+    case peerpb.Algorithm_DQPBFT:
+        p = dqpbft.NewDQPBFT(cfg)
+    default:
+        cfg.Logger.Panicf("Unknown protocol specified %v", cfg.Algorithm)
+    }
+
+    return peer.New(cfg, t, p)
 }
 
 func main() {
@@ -84,7 +108,7 @@ func main() {
 		RandSeed:   time.Now().Unix(),
 	}
 
-	p := newPeer(lConfig)
+	p := NewPeer(lConfig)
 
 	// Make sure we clean up before exiting.
 	c := make(chan os.Signal, 1)

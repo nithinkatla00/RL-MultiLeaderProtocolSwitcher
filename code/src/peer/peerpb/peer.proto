@@ -24,32 +24,9 @@ message PeerInfo {
 
 enum Algorithm {
     PBFT = 0;
-    SBFT = 1;
-    Zyzzyva = 2;
-    EzBFT = 3;
-    Hybster = 4;
-    Destiny = 5;
-    Dester = 6;
-    LinHybster = 7;
-    SBFTSlow = 8;
-    Hotstuff = 9;
-    Broadcast = 10;
-    Prime = 11;
-    PreDestiny = 12;
-    MinBFT = 13;
-    DuoBFT = 14;
-    MinBFTSig = 15;
-    SBFTx = 16;
-    Hybsterx = 17;
-    ChainHotstuff = 18;
-    RCC = 19;
-    MirBFT = 20;
-    Dispel = 21;
-    DQPBFT = 22;
-    DQSBFTSlow = 23;
-    ChainDuoBFT = 24;
-    MultiChainDuoBFT = 25;
-    MultiChainDuoBFTRCC = 26;
+    MirBFT = 1;
+    Dispel = 2;
+    DQPBFT = 3;
 }
 
 message MultiChainDuoBFTConfig {

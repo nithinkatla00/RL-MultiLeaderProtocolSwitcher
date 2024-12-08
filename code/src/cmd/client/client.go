@@ -143,11 +143,7 @@ func main() {
 
 		var reqFunc func(*commandpb.Command) (*commandpb.CommandResult, error)
 		switch config.Algorithm {
-		case peerpb.Algorithm_SBFT:
-			fallthrough
 		case peerpb.Algorithm_MirBFT:
-			fallthrough
-		case peerpb.Algorithm_RCC:
 			fallthrough
 		case peerpb.Algorithm_Dispel:
 			reqFunc = client.MultiPrimaryRRTarget
