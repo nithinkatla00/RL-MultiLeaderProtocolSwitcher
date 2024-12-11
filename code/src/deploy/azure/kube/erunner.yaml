@@ -1,0 +1,172 @@
+# ReplicaSet for the go-consensus server (workers: node2, node3)
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: go-consensus-server
+spec:
+  replicas: 2  # Two server replicas on workers
+  selector:
+    matchLabels:
+      app: go-consensus-server
+  template:
+    metadata:
+      labels:
+        app: go-consensus-server
+    spec:
+      hostNetwork: true
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: topology.kubernetes.io/region
+          whenUnsatisfiable: ScheduleAnyway
+          labelSelector:
+            matchLabels:
+              app: go-consensus-server
+        - maxSkew: 1
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: DoNotSchedule
+          labelSelector:
+            matchLabels:
+              app: go-consensus-server
+      nodeSelector:
+        node-role.kubernetes.io/worker: ""  # Schedule on workers only (node2, node3)
+      containers:
+        - name: go-consensus-server
+          image: ghcr.io/nithinkatla00/rl-multileaderprotocolswitcher:latest
+          imagePullPolicy: Always
+          command:
+            - "/bin/bash"
+            - "-ecx"
+            - "exec /bin/peer"
+          ports:
+            - containerPort: 7000
+          securityContext:
+            privileged: true
+          env:
+            - name: HOSTNAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
+            - name: REGION
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
+            - name: PODIP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
+            - name: PODNAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: DD_AGENT_HOST
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.hostIP
+            - name: DD_TRACE_SAMPLE_RATE
+              value: "0.2"
+            - name: DD_TRACE_RATE_LIMIT
+              value: "20.0"
+      terminationGracePeriodSeconds: 1
+      hostAliases:
+        - ip: "155.98.38.26"  # Master node IP
+          hostnames:
+            - "master-ip"
+
+---
+
+# ReplicaSet for the go-consensus client (client: node0)
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: go-consensus-client
+spec:
+  replicas: 1  # One client on node0
+  selector:
+    matchLabels:
+      app: go-consensus-client
+  template:
+    metadata:
+      labels:
+        app: go-consensus-client
+    spec:
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: topology.kubernetes.io/region
+          whenUnsatisfiable: ScheduleAnyway
+          labelSelector:
+            matchLabels:
+              app: go-consensus-client
+      nodeSelector:
+        node-role.kubernetes.io/client: ""  # Schedule on client only (node0)
+      containers:
+        - name: go-consensus-client
+          image: ghcr.io/nithinkatla00/rl-multileaderprotocolswitcher:latest
+          imagePullPolicy: Always
+          command:
+            - "/bin/bash"
+            - "-ecx"
+            - "exec /bin/client"
+          ports:
+            - containerPort: 7000
+          env:
+            - name: HOSTNAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
+            - name: REGION
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
+            - name: PODIP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
+            - name: PODNAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: DD_AGENT_HOST
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.hostIP
+      terminationGracePeriodSeconds: 1
+      hostAliases:
+        - ip: "155.98.38.26"  # Master node IP
+          hostnames:
+            - "master-ip"
+
+---
+
+# Service for the client
+apiVersion: v1
+kind: Service
+metadata:
+  name: go-consensus-client-service
+  annotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "9091"
+spec:
+  clusterIP: "None"
+  selector:
+    app: go-consensus-client
+  ports:
+    - port: 9091
+      targetPort: 9091
+
+---
+
+# Service for the server
+apiVersion: v1
+kind: Service
+metadata:
+  name: go-consensus-server-service
+  annotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "9091"
+spec:
+  clusterIP: "None"
+  selector:
+    app: go-consensus-server
+  ports:
+    - port: 9091
+      targetPort: 9091
