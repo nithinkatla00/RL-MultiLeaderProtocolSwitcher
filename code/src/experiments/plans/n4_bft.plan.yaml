@@ -1,0 +1,56 @@
+batches:
+- algorithms:
+  - fast_response_percent: 0
+    inflight_request_counts:
+    - client_counts:
+      - 10
+      - 30
+      inflight_request_count: 1
+    - client_counts:
+      - 10
+      - 20
+      - 30
+      - 40
+      inflight_request_count: 5
+    - client_counts:
+      - 10
+      - 20
+      - 30
+      - 40
+      inflight_request_count: 10
+    key_file: keys/bls_10_19.txt
+    max_failures: 1
+    name: Dispel
+    num_chains: 0
+  - fast_response_percent: 0
+    inflight_request_counts:
+    - client_counts:
+      - 10
+      - 30
+      inflight_request_count: 1
+    - client_counts:
+      - 10
+      - 20
+      - 30
+      - 40
+      inflight_request_count: 5
+    - client_counts:
+      - 10
+      - 20
+      - 30
+      - 40
+      inflight_request_count: 10
+    key_file: keys/tss_19_19.txt
+    max_failures: 1
+    name: Dispel
+    num_chains: 0
+  batch_size: 100
+count: 20
+data_dir_prefix: exp_data/n4
+datapoint_time: 1m40s
+kube_config_path: /etc/rancher/k3s/k3s.yaml
+node_count: 4
+payload_size: 500
+run_config_path: config.yaml
+scale_datapoint_time: 1m30s
+spec_file_path: deploy/azure/kube/erunner.yaml

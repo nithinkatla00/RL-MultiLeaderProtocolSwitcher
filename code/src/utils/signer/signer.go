@@ -14,7 +14,7 @@ import (
 
 const (
 	PRIVATE_KEY = "MHcCAQEEIAA0R4fcx9fa7VD0EtHWcsnXwds8x6vI8WnDueH+YPY+oAoGCCqGSM49AwEHoUQDQgAEuebCi0tHwx1yDsJ1UbcjfpTkb+4e8oyIP7VqvMdswY3MWcHiWhCZzXAkET78a+dUIIy4W1qEcsN26RRRKcSt8w=="
-	PUBLIC_KEY = "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEuebCi0tHwx1yDsJ1UbcjfpTkb+4e8oyIP7VqvMdswY3MWcHiWhCZzXAkET78a+dUIIy4W1qEcsN26RRRKcSt8w=="
+	PUBLIC_KEY  = "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEuebCi0tHwx1yDsJ1UbcjfpTkb+4e8oyIP7VqvMdswY3MWcHiWhCZzXAkET78a+dUIIy4W1qEcsN26RRRKcSt8w=="
 )
 
 type Signer struct {
@@ -37,8 +37,8 @@ func NewSigner() *Signer {
 	return &Signer{
 		HashScheme: crypto.SHA256,
 		SigCipher:  &EcdsaSigCipher{},
-		privKey: pk,
-		pubKey: puk,
+		privKey:    pk,
+		pubKey:     puk,
 	}
 }
 
@@ -178,4 +178,3 @@ func (spec *ecdsaKeySpec) generateKeyPair(securityParam int) (string, string, er
 
 	return privKeyBase64, pubKeyBase64, nil
 }
-

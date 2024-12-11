@@ -20,7 +20,7 @@ message BaseServerConfig {
     int32 enclave_batch_size = 7;
     uint32 dq_o_batch_size = 8;
     uint32 dq_o_batch_timeout = 18;
-    uint32 destiny_signer_workers = 9;
+    uint32 dispel_signer_workers = 9;
     map<string, uint32> workers = 10;
     map<string, uint32> workers_queue_sizes = 14;
 

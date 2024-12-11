@@ -1,0 +1,19 @@
+2024/12/11 00:06:54.119348 INFO: Parsed specification file. Found 4 configs.
+2024/12/11 00:06:54.119422 INFO: Specification 1, Kind: ReplicaSet
+2024/12/11 00:06:54.119441 INFO: Specification 2, Kind: ReplicaSet
+2024/12/11 00:06:54.119453 INFO: Specification 3, Kind: Service
+2024/12/11 00:06:54.119469 INFO: Specification 4, Kind: Service
+2024/12/11 00:06:54.119676 INFO: Experiment started on 2024-12-11 00:06:54.119659196 +0000 UTC
+2024/12/11 00:06:54.120414 INFO: Preparing for the experiment...
+2024/12/11 00:06:54.120433 INFO: Writing raw run config
+2024/12/11 00:06:54.121832 INFO: Running Data Series Experiments (Total : 20)...
+2024/12/11 00:06:54.121945 INFO: Series Experiment Dispel
+2024/12/11 00:06:54.122044 INFO: Creating Directory exp_data/n4/0-Dispel-b100
+2024/12/11 00:06:54.122373 INFO: Running Data Point Experiment: Inflight Plan: {1 [10 30]}; Start At 0
+2024/12/11 00:06:54.181448 INFO: Waiting for service discovery to notify...
+2024/12/11 00:11:54.181993 ERROR: discovery service returned an error: %!w(*fmt.wrapError=&{timeout occured: context deadline exceeded {}})
+2024/12/11 00:11:54.211995 INFO: Deleting RS: go-consensus-client...
+2024/12/11 00:11:54.220355 INFO: Deleting RS: go-consensus-server...
+2024/12/11 00:11:54.236182 ERROR: error running datapoint experiment: %!w(*fmt.wrapError=&{discovery service returned an error: timeout occured: context deadline exceeded 0xc00048e000})
+2024/12/11 00:11:54.236237 ERROR: Experiment Failed: %!w(*fmt.wrapError=&{error running datapoint experiment: discovery service returned an error: timeout occured: context deadline exceeded 0xc00048e060})
+2024/12/11 00:11:54.259880 INFO: Finished Running Experiments

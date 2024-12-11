@@ -52,7 +52,7 @@ func (c *ClientWorker) ThresholdMultiPrimary(
 	resultChan := make(chan *commandpb.CommandResult, 1)
 	errChan := make(chan peerpb.PeerID, 1)
 
-	c.logger.Debugf("sending Destiny request %v to %v", req.Timestamp, target)
+	c.logger.Debugf("sending dispel request %v to %v", req.Timestamp, target)
 	c.conn.Send(req.Target, ctx, req, resultChan, errChan)
 
 	select {

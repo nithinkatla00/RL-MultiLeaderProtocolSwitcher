@@ -1,0 +1,162 @@
+apiVersion: v1
+kind: Node
+metadata:
+  annotations:
+    alpha.kubernetes.io/provided-node-ip: 155.98.38.26
+    flannel.alpha.coreos.com/backend-data: '{"VNI":1,"VtepMAC":"a2:d6:22:61:62:ec"}'
+    flannel.alpha.coreos.com/backend-type: vxlan
+    flannel.alpha.coreos.com/kube-subnet-manager: "true"
+    flannel.alpha.coreos.com/public-ip: 155.98.38.26
+    k3s.io/external-ip: 155.98.38.26
+    k3s.io/hostname: node1.dispel.ordering.emulab.net
+    k3s.io/internal-ip: 155.98.38.26
+    k3s.io/node-args: '["server","--node-ip","155.98.38.26","--node-external-ip","155.98.38.26","--write-kubeconfig-mode","644"]'
+    k3s.io/node-config-hash: A7INKLAZUN42JTCTFISKHE2B6HXDYHRMXSX4NPVAFAKZSL6WRNDA====
+    k3s.io/node-env: '{}'
+    node.alpha.kubernetes.io/ttl: "0"
+    volumes.kubernetes.io/controller-managed-attach-detach: "true"
+  creationTimestamp: "2024-12-08T18:15:14Z"
+  finalizers:
+  - wrangler.cattle.io/node
+  labels:
+    beta.kubernetes.io/arch: amd64
+    beta.kubernetes.io/instance-type: k3s
+    beta.kubernetes.io/os: linux
+    kubernetes.io/arch: amd64
+    kubernetes.io/hostname: node1.dispel.ordering.emulab.net
+    kubernetes.io/os: linux
+    node-role.kubernetes.io/control-plane: "true"
+    node-role.kubernetes.io/master: "true"
+    node.kubernetes.io/instance-type: k3s
+  name: node1.dispel.ordering.emulab.net
+  resourceVersion: "25531"
+  uid: 8d3d97f1-8890-4bd8-b0f0-f91b330a5b94
+spec:
+  podCIDR: 10.42.0.0/24
+  podCIDRs:
+  - 10.42.0.0/24
+  providerID: k3s://node1.dispel.ordering.emulab.net
+status:
+  addresses:
+  - address: 155.98.38.26
+    type: InternalIP
+  - address: 155.98.38.26
+    type: ExternalIP
+  - address: node1.dispel.ordering.emulab.net
+    type: Hostname
+  allocatable:
+    cpu: "8"
+    ephemeral-storage: "63697585922"
+    hugepages-2Mi: "0"
+    memory: 12230608Ki
+    pods: "110"
+  capacity:
+    cpu: "8"
+    ephemeral-storage: 65478604Ki
+    hugepages-2Mi: "0"
+    memory: 12230608Ki
+    pods: "110"
+  conditions:
+  - lastHeartbeatTime: "2024-12-09T15:44:39Z"
+    lastTransitionTime: "2024-12-08T18:15:14Z"
+    message: kubelet has sufficient memory available
+    reason: KubeletHasSufficientMemory
+    status: "False"
+    type: MemoryPressure
+  - lastHeartbeatTime: "2024-12-09T15:44:39Z"
+    lastTransitionTime: "2024-12-08T18:15:14Z"
+    message: kubelet has no disk pressure
+    reason: KubeletHasNoDiskPressure
+    status: "False"
+    type: DiskPressure
+  - lastHeartbeatTime: "2024-12-09T15:44:39Z"
+    lastTransitionTime: "2024-12-08T18:15:14Z"
+    message: kubelet has sufficient PID available
+    reason: KubeletHasSufficientPID
+    status: "False"
+    type: PIDPressure
+  - lastHeartbeatTime: "2024-12-09T15:44:39Z"
+    lastTransitionTime: "2024-12-09T15:44:39Z"
+    message: kubelet is posting ready status
+    reason: KubeletReady
+    status: "True"
+    type: Ready
+  daemonEndpoints:
+    kubeletEndpoint:
+      Port: 10250
+  images:
+  - names:
+    - docker.io/grafana/grafana@sha256:fa801ab6e1ae035135309580891e09f7eb94d1abdbd2106bdc288030b028158c
+    - docker.io/grafana/grafana:11.3.1
+    sizeBytes: 132721657
+  - names:
+    - quay.io/prometheus/prometheus@sha256:2659f4c2ebb718e7695cb9b25ffa7d6be64db013daba13e05c875451cf51b0d3
+    - quay.io/prometheus/prometheus:v2.55.1
+    sizeBytes: 114286128
+  - names:
+    - docker.io/rancher/klipper-helm@sha256:73ff7ef399717ba8339559054557bd427bdafb47db112165a8c0c358d1ca0283
+    - docker.io/rancher/klipper-helm:v0.9.3-build20241008
+    sizeBytes: 70496341
+  - names:
+    - docker.io/rancher/mirrored-library-traefik@sha256:b19934b3f8e03e213e258e69d57376fd0c4441ea04a518313cab2835fe9b92b3
+    - docker.io/rancher/mirrored-library-traefik:2.11.10
+    sizeBytes: 47012064
+  - names:
+    - quay.io/prometheus/alertmanager@sha256:e13b6ed5cb929eeaee733479dce55e10eb3bc2e9c4586c705a4e8da41e5eacf5
+    - quay.io/prometheus/alertmanager:v0.27.0
+    sizeBytes: 32411757
+  - names:
+    - quay.io/kiwigrid/k8s-sidecar@sha256:4166a019eeafd1f0fef4d867dc5f224f18d84ec8681dbb31f3ca258ecf07bcf2
+    - quay.io/kiwigrid/k8s-sidecar:1.28.0
+    sizeBytes: 23059632
+  - names:
+    - registry.k8s.io/ingress-nginx/kube-webhook-certgen@sha256:4d99688e557396f5baa150e019ff7d5b7334f9b9f9a8dab64038c5c2a006f6b5
+    - registry.k8s.io/ingress-nginx/kube-webhook-certgen:v20221220-controller-v1.5.1-58-g787ea74b6
+    sizeBytes: 19687037
+  - names:
+    - docker.io/rancher/mirrored-metrics-server@sha256:dccf8474fb910fef261d31d9483d7e4c1df7b86cf4d638fb6a7d7c88bd51600a
+    - docker.io/rancher/mirrored-metrics-server:v0.7.2
+    sizeBytes: 19494186
+  - names:
+    - quay.io/prometheus-operator/prometheus-operator@sha256:bfcc5d6058be19bc5b5b6da1496a7d2620c5568a34ef21c4d2fdb35c6712cba9
+    - quay.io/prometheus-operator/prometheus-operator:v0.78.2
+    sizeBytes: 18778055
+  - names:
+    - docker.io/rancher/local-path-provisioner@sha256:9b914881170048f80ae9302f36e5b99b4a6b18af73a38adc1c66d12f65d360be
+    - docker.io/rancher/local-path-provisioner:v0.0.30
+    sizeBytes: 18584855
+  - names:
+    - docker.io/rancher/mirrored-coredns-coredns@sha256:8461f69c1d8252a73f4c217ca17c75ac704af1c54c2332c199c637ab2815536a
+    - docker.io/rancher/mirrored-coredns-coredns:1.11.3
+    sizeBytes: 18561302
+  - names:
+    - registry.k8s.io/kube-state-metrics/kube-state-metrics@sha256:37d841299325c23b56e5951176ce8ef317d537447c0f1b2d2437dddbb1f51165
+    - registry.k8s.io/kube-state-metrics/kube-state-metrics:v2.14.0
+    sizeBytes: 15427061
+  - names:
+    - quay.io/prometheus-operator/prometheus-config-reloader@sha256:944b2c67345c2dd9fafc4cddbf389cb09f930f9e83c8d06e90147076223a9e56
+    - quay.io/prometheus-operator/prometheus-config-reloader:v0.78.2
+    sizeBytes: 14721793
+  - names:
+    - quay.io/prometheus/node-exporter@sha256:4032c6d5bfd752342c3e631c2f1de93ba6b86c41db6b167b9a35372c139e7706
+    - quay.io/prometheus/node-exporter:v1.8.2
+    sizeBytes: 12041464
+  - names:
+    - docker.io/rancher/klipper-lb@sha256:dd380f5d89a52f2a07853ff17a6048f805c1f8113b50578f3efc3efb9bcf670a
+    - docker.io/rancher/klipper-lb:v0.4.9
+    sizeBytes: 4990278
+  - names:
+    - docker.io/rancher/mirrored-pause@sha256:74c4244427b7312c5b901fe0f67cbc53683d06f4f24c6faee65d4182bf0fa893
+    - docker.io/rancher/mirrored-pause:3.6
+    sizeBytes: 301463
+  nodeInfo:
+    architecture: amd64
+    bootID: 50320e40-5dfa-4f00-ad04-7cbd18b12e73
+    containerRuntimeVersion: containerd://1.7.22-k3s1
+    kernelVersion: 5.15.0-122-generic
+    kubeProxyVersion: v1.30.6+k3s1
+    kubeletVersion: v1.30.6+k3s1
+    machineID: bc666d827de842a68ad438ae1ba4860f
+    operatingSystem: linux
+    osImage: Ubuntu 22.04.5 LTS
+    systemUUID: 4c4c4544-0031-4710-8038-c7c04f534b31

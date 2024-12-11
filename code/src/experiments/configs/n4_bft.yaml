@@ -1,0 +1,25 @@
+spec_file_path: "deploy/azure/kube/erunner.yaml"
+run_config_path: "config.yaml"
+data_dir_prefix: "exp_data/n4"
+kube_config_path: "/etc/rancher/k3s/k3s.yaml"
+master-ip: 155.98.38.26
+node_count: 4
+algorithms:
+  - name: Dispel
+    max_failures: 1
+    key_file: "keys/bls_10_19.txt"
+  - name: Dispel
+    max_failures: 1
+    key_file: "keys/tss_19_19.txt"
+request_counts: 
+- inflight_request_counts: [1]
+  client_counts: [10, 30]
+- inflight_request_counts: [5]
+  client_counts: [10, 20, 30, 40]
+- inflight_request_counts: [10]
+  client_counts: [10, 20, 30, 40]
+client_batch_counts: [100]
+payload_size: 500
+datapoint_time: 1m40s
+scale_datapoint_time: 1m30s
+

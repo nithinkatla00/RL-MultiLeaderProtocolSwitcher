@@ -38,21 +38,21 @@ func startMetricsServer() {
 }
 
 func NewPeer(cfg *peer.LocalConfig) *peer.Peer {
-    t := transport.NewGRPCTransport()
+	t := transport.NewGRPCTransport()
 
-    var p peer.Protocol
-    switch cfg.Algorithm {
-    case peerpb.Algorithm_MirBFT:
-        p = mirbft.NewMirBFT(cfg)
-    case peerpb.Algorithm_Dispel:
-        p = dispel.NewDispel(cfg)
-    case peerpb.Algorithm_DQPBFT:
-        p = dqpbft.NewDQPBFT(cfg)
-    default:
-        cfg.Logger.Panicf("Unknown protocol specified %v", cfg.Algorithm)
-    }
+	var p peer.Protocol
+	switch cfg.Algorithm {
+	case peerpb.Algorithm_MirBFT:
+		p = mirbft.NewMirBFT(cfg)
+	case peerpb.Algorithm_Dispel:
+		p = dispel.NewDispel(cfg)
+	case peerpb.Algorithm_DQPBFT:
+		p = dqpbft.NewDQPBFT(cfg)
+	default:
+		cfg.Logger.Panicf("Unknown protocol specified %v", cfg.Algorithm)
+	}
 
-    return peer.New(cfg, t, p)
+	return peer.New(cfg, t, p)
 }
 
 func main() {
